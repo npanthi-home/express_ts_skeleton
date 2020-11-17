@@ -1,0 +1,6 @@
+enum WebBeans {
+    USER_WEB_DTO_TRANSFORMER = 'USER_WEB_DTO_TRANSFORMER',
+    USER_CONTROLLER = 'USER_CONTROLLER',
+}
+
+export default WebBeans;

@@ -1,8 +1,8 @@
-import Transformer from '../../core/gateway/transformer/Transformer';
+import Mapper from '../../core/gateway/mapper/Mapper';
 import User from '../../core/model/User';
 import UserWebDto from './UserWebDto';
 
-class UserWebDtoTransformer implements Transformer<User, UserWebDto> {
+export default class UserWebDtoMapper implements Mapper<User, UserWebDto> {
     to(model: User) {
         const { username, email, firstName, lastName } = model;
         return {

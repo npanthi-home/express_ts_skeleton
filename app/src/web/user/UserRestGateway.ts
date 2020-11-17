@@ -8,7 +8,7 @@ export default class UserRestGateway implements UserWebGateway {
     constructor(service: UserService) {
         this.service = service;
     }
-    
+
     create(user: User) {
         return this.service.create(user);
     }

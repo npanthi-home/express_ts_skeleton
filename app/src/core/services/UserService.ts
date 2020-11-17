@@ -1,7 +1,8 @@
-import UserEntityGateway from "../gateway/entity/UserEntityGateway";
+import UserEntityGateway, * as UserEntityGatewayConfig from "../gateway/entity/UserEntityGateway";
 import User from "../model/User";
 
 export default class UserService {
+
     gateway: UserEntityGateway;
 
     constructor(gateway: UserEntityGateway) {

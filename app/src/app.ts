@@ -1,11 +1,13 @@
-import express from 'express';
+import { controller, scopePerRequest } from 'awilix-express';
+import Express from 'express';
+import Container from './Container';
+import { UserController } from './web/user/UserController';
 
-const app: express.Application = express();
-
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+const app = Express();
+const container = new Container();
+app.use(scopePerRequest(container.get()));
+app.use(controller(UserController));
 
 app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+  console.log('App is listening port 3000!');
 });
