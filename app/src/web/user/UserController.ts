@@ -1,6 +1,6 @@
 import { DELETE, GET, POST, PUT, route } from 'awilix-express';
 import { Request, Response } from 'express';
-import Mapper from '../../core/gateway/mapper/Mapper';
+import Mapper from '../../core/mapper/Mapper';
 import UserWebGateway from '../../core/gateway/web/UserWebGateway';
 import User from '../../core/model/User';
 import UserWebDto from './UserWebDto';
@@ -12,7 +12,6 @@ export class UserController {
     transformer: Mapper<User, UserWebDto>;
 
     constructor(gateway: UserWebGateway, transformer: Mapper<User, UserWebDto>) {
-        console.log('gateway', gateway, 'transformer', transformer);
         this.gateway = gateway;
         this.transformer = transformer;
     }

@@ -1,4 +1,4 @@
-import Mapper from '../../core/gateway/mapper/Mapper';
+import Mapper from '../../core/mapper/Mapper';
 import User from '../../core/model/User';
 import UserWebDto from './UserWebDto';
 
