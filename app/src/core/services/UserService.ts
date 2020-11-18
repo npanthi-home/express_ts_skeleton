@@ -1,3 +1,4 @@
+import CoreBeans from "../config/CoreBeans";
 import UserEntityGateway, * as UserEntityGatewayConfig from "../gateway/entity/UserEntityGateway";
 import User from "../model/User";
 
@@ -5,8 +6,8 @@ export default class UserService {
 
     gateway: UserEntityGateway;
 
-    constructor(gateway: UserEntityGateway) {
-        this.gateway = gateway;
+    constructor(container: any) {
+        this.gateway = container[CoreBeans.USER_ENTITY_GATEWAY];
     }
 
     create(user: User) {

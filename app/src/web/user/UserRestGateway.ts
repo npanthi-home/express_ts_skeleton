@@ -1,3 +1,4 @@
+import CoreBeans from "../../core/config/CoreBeans";
 import UserWebGateway from "../../core/gateway/web/UserWebGateway";
 import User from "../../core/model/User";
 import UserService from "../../core/services/UserService";
@@ -5,8 +6,8 @@ import UserService from "../../core/services/UserService";
 export default class UserRestGateway implements UserWebGateway {
     service: UserService;
 
-    constructor(service: UserService) {
-        this.service = service;
+    constructor(container: any) {
+        this.service = container[CoreBeans.USER_SERVICE];
     }
 
     create(user: User) {

@@ -22,11 +22,11 @@ export default class Container {
         })
         
         this.container.register({
-            [CoreBeans.USER_SERVICE]: asClass(UserService).proxy(),
-            [CoreBeans.USER_ENTITY_GATEWAY]: asClass(UserDocumentGateway).proxy(),
-            [CoreBeans.USER_WEB_GATEWAY]: asClass(UserRestGateway).proxy(),
-            [WebBeans.USER_WEB_DTO_TRANSFORMER]: asClass(UserWebDtoMapper).proxy(),
-            [WebBeans.USER_CONTROLLER]: asClass(UserController).proxy(),
+            [CoreBeans.USER_SERVICE]: asClass(UserService).singleton(),
+            [CoreBeans.USER_ENTITY_GATEWAY]: asClass(UserDocumentGateway).singleton(),
+            [CoreBeans.USER_WEB_GATEWAY]: asClass(UserRestGateway).singleton(),
+            [WebBeans.USER_WEB_DTO_TRANSFORMER]: asClass(UserWebDtoMapper).singleton(),
+            [WebBeans.USER_CONTROLLER]: asClass(UserController).singleton(),
         })
     }
 
