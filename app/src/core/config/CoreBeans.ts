@@ -2,6 +2,7 @@ enum CoreBeans {
     USER_SERVICE = 'USER_SERVICE',
     USER_WEB_GATEWAY = 'USER_WEB_GATEWAY',
     USER_ENTITY_GATEWAY = 'USER_ENTITY_GATEWAY',
+    LOGGER = 'LOGGER',
 }
 
 export default CoreBeans;

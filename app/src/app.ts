@@ -7,7 +7,6 @@ const app = Express();
 const container = new Container();
 app.use(scopePerRequest(container.get()));
 app.use(controller(UserController));
-console.log(container.get());
 
 app.listen(3000, function () {
   console.log('App is listening port 3000!');

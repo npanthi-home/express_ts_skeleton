@@ -2,8 +2,10 @@ import { asClass, AwilixContainer, createContainer, InjectionMode } from 'awilix
 import CoreBeans from './core/config/CoreBeans';
 import CoreContainer from './core/config/CoreContainer';
 import UserService from './core/services/UserService';
+import RepositoryBeans from './repository/config/RepositoryBeans';
 import RepositoryContainer from './repository/config/RepositoryContainer';
 import UserDocumentGateway from './repository/user/UserDocumentGateway';
+import ConsoleLogger from './utils/ConsoleLogger';
 import WebBeans from './web/config/WebBeans';
 import WebContainer from './web/config/WebContainer';
 import { UserController } from './web/user/UserController';
@@ -25,6 +27,7 @@ export default class Container {
             [CoreBeans.USER_SERVICE]: asClass(UserService).singleton(),
             [CoreBeans.USER_ENTITY_GATEWAY]: asClass(UserDocumentGateway).singleton(),
             [CoreBeans.USER_WEB_GATEWAY]: asClass(UserRestGateway).singleton(),
+            [CoreBeans.LOGGER]: asClass(ConsoleLogger).singleton(),
             [WebBeans.USER_WEB_DTO_TRANSFORMER]: asClass(UserWebDtoMapper).singleton(),
             [WebBeans.USER_CONTROLLER]: asClass(UserController).singleton(),
         })
