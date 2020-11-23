@@ -10,11 +10,9 @@ export default class ConnectionManager {
       return this.connection;
   }
 
-  //CXthbK8X6jVRZzR root
   static async createConnection() {
     const connection = await mongoose.connect(
       "mongodb+srv://root:CXthbK8X6jVRZzR@cluster0.vmlss.mongodb.net/nodets?retryWrites=true&w=majority",
-    //   "mongodb://root:CXthbK8X6jVRZzR@localhost:27017/nodets",
       {
         useCreateIndex: true,
         useNewUrlParser: true,
