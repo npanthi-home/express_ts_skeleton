@@ -3,7 +3,7 @@ import User from '../../core/model/User';
 import UserWebDto from './UserWebDto';
 
 export default class UserWebDtoMapper implements Mapper<User, UserWebDto> {
-    to(model: User) {
+    async to(model: User) {
         const { username, email, firstName, lastName } = model;
         return {
             username,
@@ -13,7 +13,7 @@ export default class UserWebDtoMapper implements Mapper<User, UserWebDto> {
         }
     }
 
-    from(dto: UserWebDto) {
+    async from(dto: UserWebDto) {
         const { username, email, firstName, lastName } = dto;
         return {
             id: '',

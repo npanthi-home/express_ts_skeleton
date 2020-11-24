@@ -13,7 +13,6 @@ export default class CountOneToHundredAsGuest implements Runnable {
 
     run() {
         const temp: User = {
-            id: '',
             username: `guest-${uuidv4()}`,
             email: '',
             firstName: '',

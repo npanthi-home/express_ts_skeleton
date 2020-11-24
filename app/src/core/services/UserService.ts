@@ -2,8 +2,9 @@ import CoreBeans from "../config/CoreBeans";
 import UserEntityGateway, * as UserEntityGatewayConfig from "../gateway/entity/UserEntityGateway";
 import Logger from "../gateway/utils/Logger";
 import User from "../model/User";
+import CrudService from './CrudService';
 
-export default class UserService {
+export default class UserService implements CrudService<User, string>{
 
     gateway: UserEntityGateway;
     logger: Logger;
@@ -13,20 +14,20 @@ export default class UserService {
         this.logger = container[CoreBeans.LOGGER];
     }
 
-    create(user: User) {
+    async create(user: User) {
         this.logger.info(JSON.stringify(user));
-        return this.gateway.create(user);
+        return await this.gateway.create(user);
     }
 
-    get(username: string) {
-        return this.gateway.get(username);
+    async get(username: string) {
+        return await this.gateway.get(username);
     }
 
-    delete(username: string) {
-        return this.gateway.delete(username);
+    async delete(username: string) {
+        return await this.gateway.delete(username);
     }
 
-    update(user: User) {
-        return this.gateway.update(user);
+    async update(user: User) {
+        return await this.gateway.update(user);
     }
 }
