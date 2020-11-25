@@ -3,6 +3,7 @@ export default interface User {
     email: string,
     firstName: string,
     lastName: string,
+    isAdmin?: boolean,
 }
 
 export const NullUser  = {

@@ -1,5 +1,5 @@
-import UnauthorizedError from "../../../core/error/UnauthorizedError";
-import User from "../../../core/model/User";
+import UnauthorizedError from "../../error/UnauthorizedError";
+import User from "../../model/User";
 import { Validation } from "../Validation";
 
 export interface IsAdminRequest {
@@ -8,9 +8,9 @@ export interface IsAdminRequest {
 
 export default class IsAdmin implements Validation<User, IsAdminRequest> {
   validate(request: IsAdminRequest) {
-    if (!request.user.email) {
+    if (!request.user.isAdmin) {
       throw new UnauthorizedError(
-        `${request.user.email} is not authorized for this action.`
+        `${request.user.username} is not authorized for this action.`
       );
     }
   }

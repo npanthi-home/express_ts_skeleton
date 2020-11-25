@@ -1,8 +1,7 @@
-import NotFoundError from "../../../core/error/NotFoundError";
+import NotFoundError from "../../error/types/NotFoundError";
 import { Validation } from "../Validation";
-import ValidationMetadata from "../ValidationMetadata";
-import DoFieldsExist from "./DoFieldsExist";
 import { create } from "../ValidationMetadata";
+import DoFieldsExist from "./DoFieldsExist";
 
 export default class ValidationFactory {
   static factoryName:string = "Generic";

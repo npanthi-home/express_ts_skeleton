@@ -1,4 +1,4 @@
-import NotFoundError from '../../../core/error/NotFoundError';
+import NotFoundError from '../../error/types/NotFoundError';
 import { Validation } from '../Validation';
 
 export interface FieldsExistRequest {

@@ -1,7 +1,11 @@
 import CoreBeans from "../config/CoreBeans";
-import UserEntityGateway, * as UserEntityGatewayConfig from "../gateway/entity/UserEntityGateway";
+import UserEntityGateway from "../gateway/entity/UserEntityGateway";
 import Logger from "../gateway/utils/Logger";
 import User from "../model/User";
+import { compose } from '../utils/compose';
+import { GenericValidations } from '../validation/generic/ValidationFactory';
+import { UserValidations } from '../validation/user/UserValidationFactory';
+import { validate } from '../validation/validate';
 import CrudService from './CrudService';
 
 export default class UserService implements CrudService<User, string>{
@@ -15,6 +19,11 @@ export default class UserService implements CrudService<User, string>{
     }
 
     async create(user: User) {
+        compose(
+            validate(GenericValidations.DoFieldsExist)('username', 'email'),
+            validate(UserValidations.IsAdmin)(),
+        )(user);
+
         this.logger.info(JSON.stringify(user));
         return await this.gateway.create(user);
     }
