@@ -1,7 +1,7 @@
 export default class UnauthorizedError extends Error {
-  static errorName = 'UnauthorizedError';
-
+  id: string;
   constructor(message: string) {
-    super(`${UnauthorizedError.errorName}: ${message}`);
+    super(`${UnauthorizedError.name}: ${message}`);
+    this.id = UnauthorizedError.name;
   }
 }

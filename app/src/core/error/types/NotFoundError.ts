@@ -1,7 +1,7 @@
 export default class NotFoundError extends Error {
-  static errorName = "NotFoundError";
-
+  id: string;
   constructor(message: string) {
-    super(`${NotFoundError.errorName}: ${message}`);
+    super(`${NotFoundError.name}: ${message}`);
+    this.id = NotFoundError.name;
   }
 }

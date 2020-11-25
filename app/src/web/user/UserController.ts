@@ -1,4 +1,5 @@
 import { before, DELETE, GET, POST, PUT, route } from "awilix-express";
+import { StatusCodes as Codes } from "http-status-codes";
 import bodyParser from "body-parser";
 import { Request, Response } from "express";
 import CoreBeans from "../../core/config/CoreBeans";
@@ -13,6 +14,7 @@ import { compose } from "../../core/utils/compose";
 import NotFoundError from "../../core/error/types/NotFoundError";
 import swallow from "../../core/error/swallow";
 import UnauthorizedError from "../../core/error/types/UnauthorizedError";
+import { build } from "../response/builder";
 @route("/user")
 export class UserController {
   service: UserService;
@@ -45,12 +47,18 @@ export class UserController {
   @POST()
   @before([bodyParser.json()])
   async create(request: Request, response: Response) {
-    response.send(
-      compose(
-        swallow(NotFoundError.errorName)((error: Error) => error),
-        swallow(UnauthorizedError.errorName)((error: Error) => error)
-      )(() => this.unsafeCreate(request))
-    );
+    try {
+      const userDto = await this.unsafeCreate(request);
+      response.status(Codes.OK).send(userDto);
+    } catch (error) {
+      response.send(
+        compose(
+          build(UnauthorizedError.name)(Codes.UNAUTHORIZED),
+          build(NotFoundError.name)(Codes.NOT_FOUND),
+          build(Error.name)(Codes.BAD_REQUEST)
+        )(error)
+      );
+    }
   }
 
   private async unsafeCreate(request: Request) {
