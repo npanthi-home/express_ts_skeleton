@@ -1,6 +1,6 @@
-import UnauthorizedError from "../../error/UnauthorizedError";
 import User from "../../model/User";
 import { Validation } from "../Validation";
+import UnauthorizedError from '../../error/types/UnauthorizedError';
 
 export interface IsAdminRequest {
   user: User;

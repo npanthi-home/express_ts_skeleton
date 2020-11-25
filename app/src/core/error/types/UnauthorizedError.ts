@@ -1,9 +1,7 @@
 export default class UnauthorizedError extends Error {
-  name: string;
+  static errorName = 'UnauthorizedError';
 
   constructor(message: string) {
-    const name = "UnauthorizedError";
-    super(`${name}: ${message}`);
-    this.name = name;
+    super(`${UnauthorizedError.errorName}: ${message}`);
   }
 }

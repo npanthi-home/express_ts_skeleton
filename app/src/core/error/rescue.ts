@@ -1,5 +1,5 @@
 let rescue = (error: Error, type: string) => {
-    if(!(type === typeof error)) {
+    if(!(type === error.name)) {
         throw error;
     } 
 };

@@ -8,7 +8,11 @@ import UserService from "../../core/services/UserService";
 import WebBeans from "../config/WebBeans";
 import UserWebDto from "./UserWebDto";
 import CountOneToHundredAsGuest from "../../core/usecase/user/CountOneToHundredAsGuest";
-import UseCases from '../../core/config/UseCases';
+import UseCases from "../../core/config/UseCases";
+import { compose } from "../../core/utils/compose";
+import NotFoundError from "../../core/error/types/NotFoundError";
+import swallow from "../../core/error/swallow";
+import UnauthorizedError from "../../core/error/types/UnauthorizedError";
 @route("/user")
 export class UserController {
   service: UserService;
@@ -26,17 +30,15 @@ export class UserController {
   @GET()
   async count(request: Request, response: Response) {
     await this.countOneToHundredAsGuest.run();
-    response.send('done');
+    response.send("done");
   }
 
   @route("/:username")
   @GET()
   async get(request: Request, response: Response) {
-    response.send(
-      await this.service
-        .get(request.params.username)
-        .map((model) => this.mapper.to(model))
-    );
+    const user = await this.service.get(request.params.username);
+    const userDto = await this.mapper.to(user);
+    response.send(userDto);
   }
 
   @route("/")
@@ -44,28 +46,35 @@ export class UserController {
   @before([bodyParser.json()])
   async create(request: Request, response: Response) {
     response.send(
-      await this.mapper.to(this.service.create(this.mapper.from(request.body)))
+      compose(
+        swallow(NotFoundError.errorName)((error: Error) => error),
+        swallow(UnauthorizedError.errorName)((error: Error) => error)
+      )(() => this.unsafeCreate(request))
     );
+  }
+
+  private async unsafeCreate(request: Request) {
+    const user = await this.mapper.from(request.body);
+    const savedUser = await this.service.create(user);
+    return await this.mapper.to(savedUser);
   }
 
   @route("/")
   @PUT()
   @before([bodyParser.json()])
   async update(request: Request, response: Response) {
-    response.send(
-      await this.service
-        .update(this.mapper.from(request.body))
-        .map((model) => this.mapper.to(model))
+    const user = await this.service.update(
+      await this.mapper.from(request.body)
     );
+    const userDto = await this.mapper.to(user);
+    response.send(userDto);
   }
 
   @route("/:username")
   @DELETE()
   async delete(request: Request, response: Response) {
-    response.send(
-      await this.service
-        .delete(request.params.username)
-        .map((model) => this.mapper.to(model))
-    );
+    const user = await this.service.delete(request.params.username);
+    const userDto = await this.mapper.to(user);
+    response.send(userDto);
   }
 }
