@@ -50,6 +50,7 @@ export class UserController {
       const userDto = await this.unsafeCreate(request);
       response.status(Codes.OK).send(userDto);
     } catch (error) {
+      console.log(error);
       response.send(
         compose(
           buildError(UnauthorizedError.name)(Codes.UNAUTHORIZED),

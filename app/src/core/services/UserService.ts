@@ -1,4 +1,6 @@
 import CoreBeans from "../config/CoreBeans";
+import AfterMethod from "../decorators/AfterMethod";
+import BeforeMethod from "../decorators/BeforeMethod";
 import UserEntityGateway from "../gateway/entity/UserEntityGateway";
 import Logger from "../gateway/utils/Logger";
 import User from "../model/User";
@@ -17,13 +19,14 @@ export default class UserService implements CrudService<User, string> {
     this.logger = container[CoreBeans.LOGGER];
   }
 
-  async create(user: User) {
+  @BeforeMethod((user: User) =>
     compose(
       validateWith(GenericValidations.DoFieldsExist)("username", "email"),
-      validate(UserValidations.IsAdmin),
-    )(user);
-
-    this.logger.info(JSON.stringify(user));
+      validate(UserValidations.IsAdmin)
+    )(user)
+  )
+  @AfterMethod((user: User) => console.log('AfterMethod', user))
+  async create(user: User) {
     return await this.gateway.create(user);
   }
 

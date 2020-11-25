@@ -1,5 +1,3 @@
-import { AnySrvRecord } from "dns";
-
 const defaultBuilder = (error: any) => ({
   name: error.id,
   message: error.message,
