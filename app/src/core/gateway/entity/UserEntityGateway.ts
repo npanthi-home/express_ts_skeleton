@@ -2,8 +2,8 @@ import { Optional } from 'optional-typescript';
 import User from '../../model/User';
 
 export default interface UserEntityGateway {
-    create: (user: User) => User;
-    get: (username: string) => Optional<User>;
-    delete: (username: string) => Optional<User>;
-    update: (user: User) => Optional<User>;
+    create: (user: User) => Promise<User>;
+    get: (username: string) => Promise<User>;
+    delete: (username: string) => Promise<User>;
+    update: (user: User) => Promise<User>;
 }

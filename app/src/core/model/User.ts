@@ -1,7 +1,12 @@
 export default interface User {
-    id: string,
     username: string,
     email: string,
-    firstName: string,
-    lastName: string,
+    firstName?: string,
+    lastName?: string,
+    isAdmin?: boolean,
+}
+
+export const NullUser  = {
+    username: '',
+    email: '',
 }

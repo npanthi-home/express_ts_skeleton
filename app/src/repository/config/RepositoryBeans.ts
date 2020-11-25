@@ -1,6 +1,7 @@
 enum RepositoryBeans {
     USER_MONGO_REPO = 'USER_MONGO_REPO',
     CONNECTION_MANAGER = 'CONNECTION_MANAGER',
+    PROFILE_DOCUMENT_MAPPER = 'PROFILE_DOCUMENT_MAPPER',
 }
 
 export default RepositoryBeans;

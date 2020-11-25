@@ -7,6 +7,6 @@ const ProfileSchema: Schema = new Schema({
   username: { type: String, required: true },
 });
 
-const MongoProfile: Model<ProfileDocument> = model("Profile", ProfileSchema);
+const ProfileEntity: Model<ProfileDocument> = model("Profile", ProfileSchema);
 
-export default MongoProfile;
+export default ProfileEntity;
