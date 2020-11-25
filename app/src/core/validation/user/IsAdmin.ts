@@ -15,7 +15,7 @@ export default class IsAdmin implements Validation<User, IsAdminRequest> {
     }
   }
 
-  buildRequest(entity: User, params: any) {
+  buildRequest(entity: User) {
     return { user: entity };
   }
 }

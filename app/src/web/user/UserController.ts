@@ -14,7 +14,7 @@ import { compose } from "../../core/utils/compose";
 import NotFoundError from "../../core/error/types/NotFoundError";
 import swallow from "../../core/error/swallow";
 import UnauthorizedError from "../../core/error/types/UnauthorizedError";
-import { build } from "../response/builder";
+import { buildError } from "../response/builder";
 @route("/user")
 export class UserController {
   service: UserService;
@@ -53,9 +53,9 @@ export class UserController {
     } catch (error) {
       response.send(
         compose(
-          build(UnauthorizedError.name)(Codes.UNAUTHORIZED),
-          build(NotFoundError.name)(Codes.NOT_FOUND),
-          build(Error.name)(Codes.BAD_REQUEST)
+          buildError(UnauthorizedError.name)(Codes.UNAUTHORIZED),
+          buildError(NotFoundError.name)(Codes.NOT_FOUND),
+          buildError(Error.name)(Codes.BAD_REQUEST)
         )(error)
       );
     }
