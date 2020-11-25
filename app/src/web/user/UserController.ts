@@ -1,20 +1,19 @@
 import { before, DELETE, GET, POST, PUT, route } from "awilix-express";
-import { StatusCodes as Codes } from "http-status-codes";
 import bodyParser from "body-parser";
 import { Request, Response } from "express";
+import { StatusCodes as Codes } from "http-status-codes";
 import CoreBeans from "../../core/config/CoreBeans";
+import UseCases from "../../core/config/UseCases";
+import NotFoundError from "../../core/error/types/NotFoundError";
+import UnauthorizedError from "../../core/error/types/UnauthorizedError";
 import Mapper from "../../core/mapper/Mapper";
 import User from "../../core/model/User";
 import UserService from "../../core/services/UserService";
-import WebBeans from "../config/WebBeans";
-import UserWebDto from "./UserWebDto";
 import CountOneToHundredAsGuest from "../../core/usecase/user/CountOneToHundredAsGuest";
-import UseCases from "../../core/config/UseCases";
 import { compose } from "../../core/utils/compose";
-import NotFoundError from "../../core/error/types/NotFoundError";
-import swallow from "../../core/error/swallow";
-import UnauthorizedError from "../../core/error/types/UnauthorizedError";
+import WebBeans from "../config/WebBeans";
 import { buildError } from "../response/builder";
+import UserWebDto from "./UserWebDto";
 @route("/user")
 export class UserController {
   service: UserService;
